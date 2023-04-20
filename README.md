@@ -17,7 +17,6 @@ This is an employee database management system built using the Django web framew
 - Python 3.x
 - Django==4.2
 - django-crispy-forms
-- pillow
 - crispy-bootstrap4==2022.1
 - django-crispy-forms==2.0
 - django-session-timeout==0.1.0
