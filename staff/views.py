@@ -2,7 +2,9 @@ from django.shortcuts import render
 from .models import Employee
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def dashboard(request):
     total_staffs = len(Employee.objects.all())
     full_time_staffs = len(Employee.objects.filter(employment_status="Full Time").all())
@@ -23,6 +25,7 @@ def dashboard(request):
         'contract':contract, 'independent_contract': independent_contract
     })
 
+@login_required
 def staffs(request):
     staffs = Employee.objects.all()
     page = request.GET.get('page', 1)
@@ -38,6 +41,7 @@ def staffs(request):
         'staffs': paginator
     })
 
+@login_required
 def staff_profile(request):
     staff = get_object_or_404(Employee, id=request.POST['id'])
     return render(request, "staff/profile.html", {'staff': staff})
