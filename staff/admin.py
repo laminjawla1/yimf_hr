@@ -8,7 +8,7 @@ def generate_employee_records(modeladmin, request, queryset):
     headers  =["EMPLOYEE NAME", "NICKNAME", "DATE OF BIRTH", "PLACE OF BIRTH", "GENDER", "NATIONALITY", "MARITAL STATUS", "SPOUSE", "NATIONAL ID",
                 "PASSPORT", "DRIVERS LICENSE", "VOTERS ID", "ACCOUNT NAME", "BANK", "SWIFT CODE", "ACCOUNT NUMBER", "COUNTRY", "STREET", 
                 "CITY", "ZIP CODE", "CUG NUMBER", "MOBILE 1", "MOBILE 2", "PERSONAL EMAIL", "WORK EMAIL", "HIRED DATE", "RESIGNED DATE",
-                "CONTRACT COMMENCE", "CONTRACT END", "DIVISION", "DEPARTMEN", "TITLE", "CLASSIFICATION"]
+                "CONTRACT COMMENCE", "CONTRACT END", "DEPARTMEN", "TITLE", "CLASSIFICATION"]
     
     response = HttpResponse(
         content_type='text/csv',
@@ -21,7 +21,7 @@ def generate_employee_records(modeladmin, request, queryset):
                                 'marital_status', 'spouse', 'national_id', 'passport', 'drivers_license', 'voters_id',
                                 'account_name', 'bank', 'swift_code', 'account_number', 'country', 'street', 'city', 'zip_code', 
                                 'cug_number', 'mobile_1', 'mobile_2', 'personal_email', 'work_email', 'hired_date', 'resigned_date', 
-                                'contract_commence', 'contract_end', 'division', 'department', 'title', 'classification')
+                                'contract_commence', 'contract_end', 'department', 'title', 'classification')
     for r in cr:
         writer.writerow(r)
     return response
@@ -50,7 +50,7 @@ class EmployeeAdmin(admin.ModelAdmin):
         }),
         ('Job details', {
             'classes': ('collapse',),
-            'fields': ('division', 'department', 'classification', 'title', 'hired_date', 'resigned_date', 'contract_commence', 'contract_end', 'employment_status', 'probation_commence', 'probation_end', 'warning')
+            'fields': ('department', 'classification', 'title', 'hired_date', 'resigned_date', 'contract_commence', 'contract_end', 'employment_status', 'probation_commence', 'probation_end', 'warning')
         }),
     )
     actions = [generate_employee_records]

@@ -1,5 +1,5 @@
 from django.db import models
-from section.models import Division, Department, Title, Classification
+from section.models import Department, Title, Classification
 from PIL import Image
 import requests
 
@@ -79,7 +79,6 @@ class Employee(models.Model):
     probation_end = models.DateField(null=True, blank=True)
     warning = models.IntegerField(default=0)
 
-    division = models.ForeignKey(Division, on_delete=models.CASCADE, null=True, blank=True)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True)
     title = models.ForeignKey(Title, on_delete=models.CASCADE, null=True, blank=True)
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True, blank=True)
