@@ -1,0 +1,71 @@
+{% extends "staff/layout.html" %} 
+{% block content %}
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">DOB</th>
+      <th scope="col">POB</th>
+      <th scope="col">Gender</th>
+      <th scope="col">EMP Status</th>
+      <th scope="col">CUG</th>
+      <th scope="col">Mobile 1</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for staff in staffs %}
+    <tr>
+        <td>{{staff.staff_id}}</td>
+        {% if staff.employment_status == "Full Time" %}
+            <td style="color: green;">{{staff.employee_name}}</td>
+        {% elif staff.employment_status == "Probation" %}
+            <td style="color: blue;">{{staff.employee_name}}</td>
+        {% elif staff.employment_status == "On Suspension" %}
+            <td style="color: yellow;">{{staff.employee_name}}</td>
+        {% elif staff.employment_status == "Intern" %}
+            <td style="color: cyan;">{{staff.employee_name}}</td>
+        {% elif staff.employment_status == "Resigned" %}
+            <td style="color:brown;">{{staff.employee_name}}</td>
+        {% elif staff.employment_status == "On Leave" %}
+            <td style="color:deeppink;">{{staff.employee_name}}</td>
+        {% elif staff.employment_status == "Fired" %}
+            <td style="color:red;">{{staff.employee_name}}</td>
+        {% else%}
+            <td>{{staff.employee_name}}</td>
+        {% endif %}
+        <td>{{staff.date_of_birth}}</td>
+        <td>{{staff.place_of_birth}}</td>
+        <td>{{staff.gender}}</td>
+        <td>{{staff.employment_status}}</td>
+        <td>{{staff.cug_number}}</td>
+        <td>{{staff.mobile_1}}</td>
+        <td>
+            <form action="{% url 'staff_profile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ staff.id }}" />
+                <input class="btn btn-sm btn-success mt-2 mb-2" type="submit" value="View" />
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+{% if staffs.has_previous %}
+<a class="btn btn-outline-info mb-4" href="{% url 'staffs' %}?page=1">First</a>
+<a class="btn btn-outline-info mb-4" href="{% url 'staffs' %}?page={{ staffs.previous_page_number }}">Previous</a>
+{% endif %}
+
+{% for num in staffs.paginator.page_range %}
+{% if staffs.number == num %}
+  <a class="btn btn-info mb-4" href="{% url 'staffs' %}?page={{ num }}">{{ num }}</a>
+{% elif num > staffs.number|add:'-3' and num < staffs.number|add:'3' %}
+  <a class="btn btn-outline-info mb-4" href="{% url 'staffs' %}?page={{ num }}">{{ num }}</a>
+{% endif %}
+{% endfor %}
+
+{% if staffs.has_next %}
+<a class="btn btn-outline-info mb-4" href="{% url 'staffs' %}?page={{ staffs.next_page_number }}">Next</a>
+<a class="btn btn-outline-info mb-4" href="{% url 'staffs' %}?page={{ staffs.paginator.num_pages }}">Last</a>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,110 @@
+{% extends "staff/layout.html" %}
+{% block content %}
+    <!-- Main -->
+    <main class="main-container">
+      <div class="main-cards">
+        <div class="card">
+            <div class="card-inner">
+              <h3>Total Staffs</h3>
+              <span class="material-icons-outlined">groups</span>
+            </div>
+            <h1>{{total_staffs}}</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+              <h3>Full Time</h3>
+              <span class="material-icons-outlined">groups</span>
+            </div>
+            <h1>{{full_time_staffs}}</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+              <h3>Part Time</h3>
+              <span class="material-icons-outlined">attach_money</span>
+            </div>
+            <h1>{{part_time_staffs}}</h1>
+        </div>
+      </div>
+
+      <div class="main-cards1">
+        <div class="card">
+            <div class="card-inner">
+              <h3>Probation</h3>
+              <span class="material-icons-outlined">security</span>
+            </div>
+            <h1>{{probation}}</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+              <h3>Interns</h3>
+              <span class="material-icons-outlined">groups</span>
+            </div>
+            <h1>{{interns}}</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+              <h3>On Leave</h3>
+              <span class="material-icons-outlined">groups</span>
+            </div>
+            <h1>{{on_leave}}</h1>
+        </div>
+      </div>
+
+      <div class="main-cards2">
+          <div class="card">
+            <div class="card-inner">
+              <h3>Temporary</h3>
+              <span class="material-icons-outlined">low_priority</span>
+            </div>
+            <h1>{{temporary}}</h1>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <h3>Contract</h3>
+          <span class="material-icons-outlined">perm_identity</span>
+        </div>
+        <h1>{{contract}}</h1>
+    </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <h3>Independent Contract</h3>
+          <span class="material-icons-outlined">lock</span>
+        </div>
+        <h1>{{independent_contract}}</h1>
+      </div>
+    </div>
+    <div>
+
+      <div class="main-cards3">
+        <div class="card">
+          <div class="card-inner">
+            <h3>Suspension</h3>
+            <span class="material-icons-outlined">warning</span>
+          </div>
+          <h1>{{on_suspension}}</h1>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <h3>Resigned</h3>
+          <span class="material-icons-outlined">error</span>
+        </div>
+        <h1>{{resigned}}</h1>
+    </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <h3>Fired</h3>
+          <span class="material-icons-outlined">person_off</span>
+        </div>
+        <h1>{{fired}}</h1>
+    </div>
+    <div>
+    </main>
+{% endblock content %}

@@ -1,0 +1,361 @@
+{% extends 'staff/layout.html' %}
+{% block content %}
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="{{staff.image.url}}"  alt=""/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                            <h5>
+                                {{staff.employee_name}}
+                            </h5>
+                            <h6>
+                                {{staff.title}}
+                            </h6>
+                            <p class="proile-rating">ID : <span>{{staff.staff_id}}</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Personal Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Contact Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#job" role="tab" aria-controls="profile" aria-selected="false">Job Details</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>SOCIAL MEDIA</p>
+                    {% if staff.facebook_link %}
+                        <a href="{{staff.facebook_link}}" target="_blank">Facebook</a><br/>
+                    {% else %}
+                        <a href="#">Facebook</a><br/>
+                    {% endif %}
+                    {% if staff.instagram_link %}
+                        <a href="{{staff.instagram_link}}" target="_blank">Instagram</a><br/>
+                    {% else %}
+                        <a href="#">Instagram</a><br/>
+                    {% endif %}
+                    {% if staff.twitter_link %}
+                        <a href="{{staff.twitter_link}}" target="_blank">Twitter</a><br/>
+                    {% else %}
+                        <a href="#">Twitter</a><br/>
+                    {% endif %}
+                    {% if staff.linkedin_link %}
+                        <a href="{{staff.linkedin_link}}" target="_blank">LinkedIn</a><br/>
+                    {% else %}
+                        <a href="#">LinkedIn</a><br/>
+                    {% endif %}
+                    <p>SKILLS</p>
+                    {% for skill in staff.skills.all %}
+                        <a href="#">{{skill.name}}</a><br/>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Employee Name</label>
+                                   
+                                   
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.employee_name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Nick Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.nickname}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Date Of Birth</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.date_of_birth}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Place Of Birth</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.place_of_birth}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Nationality</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.nationality}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Marital Status</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.marital_status}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Spouse</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.spouse}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>TIN</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.tin}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>SSHFC</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.sshfc}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>National ID</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.national_id}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Drivers License</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.drivers_license}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Account Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.account_name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Bank</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.bank}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Swift Code</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.swift_code}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Account Number</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{staff.account_number}}</p>
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Country</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.country}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Street</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.street}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>City</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.city}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Zip Code</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.zip_code}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Cug</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.cug_number}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Mobile 1</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.mobile_1}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Mobile 2</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.mobile_2}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Personal Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.personal_email}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Work Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.work_email}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="job" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Hired Date</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.hired_date}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Resigned Date</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.resigned_date}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Contract Commence</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.contract_commence}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Contract End</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.contract_end}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Employment Status</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.employment_status}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Probation Commence</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.probation_commence}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Probation End</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.probation_end}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Warnings</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.warning}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Division</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.division}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Department</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.department}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Classification</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{staff.classification}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>           
+</div>
+{% endblock content %}
