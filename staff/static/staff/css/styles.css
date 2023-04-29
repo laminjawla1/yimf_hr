@@ -2,7 +2,7 @@ body {
   padding-top: 63px;
   background: #b989ad;
   color: #333333;
-  font-family: 'Poppins', sans-sherif;
+  font-family: 'Poppins';
   align-items: center;
   justify-content: center;
 }
@@ -242,4 +242,8 @@ form[id="login-form"] {
   margin: auto;
   padding-bottom: 2em;
   background-color: #77176f;
+}
+
+a[type="payroll"]{
+  color:#ffffff
 }

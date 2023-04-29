@@ -243,3 +243,8 @@ form[id="login-form"] {
   padding-bottom: 2em;
   background-color: #77176f;
 }
+@media (min-width: 1200px) {
+  .container{
+      max-width: 970px;
+  }
+}

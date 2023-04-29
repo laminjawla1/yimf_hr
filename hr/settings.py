@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get("DEBUG")) == "1"
+DEBUG = True #str(os.environ.get("DEBUG")) == "1"
 
 ALLOWED_HOSTS = ['yimfstaffdatabase.pythonanywhere.com', '127.0.0.1']
 
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "django.contrib.humanize",
+    "payroll",
     "staff",
     "section",
     "account",
