@@ -9,7 +9,6 @@ idna==3.4
 inflect==6.0.4
 Jinja2==3.1.2
 MarkupSafe==2.1.2
-pdfkit==1.0.0
 Pillow==9.5.0
 pydantic==1.10.7
 python-dotenv==1.0.0

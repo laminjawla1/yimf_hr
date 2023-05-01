@@ -13,8 +13,6 @@ from django.urls import reverse
 from staff.models import Employee
 from datetime import datetime
 import inflect
-import jinja2
-import pdfkit
 
 @login_required
 def payrolls(request):
