@@ -68,8 +68,10 @@ def payrolls(request):
         date__year=timezone.now().year, date__month=timezone.now().month
     ).aggregate(Sum('staff_fin')).get('staff_fin__sum')
 
-    absolute_total = basic_total + medical_total + transport_total + responsibility_total + housing_total + gross_total \
-                    + income_total + sshfc_total + individual_sshfc_total + deduction_total + icf_total + net_total
+    absolute_total = 0
+    if payrolls:
+        absolute_total = basic_total + medical_total + transport_total + responsibility_total + housing_total + gross_total \
+                        + income_total + sshfc_total + individual_sshfc_total + deduction_total + icf_total + net_total
 
     try:
         paginator = paginator.page(page)
