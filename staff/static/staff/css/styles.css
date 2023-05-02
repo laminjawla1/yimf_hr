@@ -174,12 +174,11 @@ a.article-title:hover {
 
 /* ------------------------- */
 .fired:first-child {
-
-  background-color: #2962ff;
+  background-color: #f62460;
 }
 
 .fired:nth-child(2) {
-  background-color: #ff6d00;
+  background-color: #a74706;
 }
 
 .fired:nth-child(3) {
@@ -187,7 +186,7 @@ a.article-title:hover {
 }
 
 .fired:nth-child(4) {
-  background-color: #2e7d32;
+  background-color: #2962ff;
 }
 
 
