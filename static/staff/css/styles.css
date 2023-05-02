@@ -2,7 +2,7 @@ body {
   padding-top: 63px;
   background: #b989ad;
   color: #333333;
-  font-family: 'Poppins', sans-sherif;
+  font-family: 'Poppins';
   align-items: center;
   justify-content: center;
 }
@@ -148,6 +148,14 @@ a.article-title:hover {
   border-radius: 5px;
 }
 
+.fired {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 25px;
+  border-radius: 5px;
+}
+
 .card:first-child {
   background-color: #2962ff;
 }
@@ -163,6 +171,25 @@ a.article-title:hover {
 .card:nth-child(4) {
   background-color: #d50000;
 }
+
+/* ------------------------- */
+.fired:first-child {
+
+  background-color: #2962ff;
+}
+
+.fired:nth-child(2) {
+  background-color: #ff6d00;
+}
+
+.fired:nth-child(3) {
+  background-color: #d50000;
+}
+
+.fired:nth-child(4) {
+  background-color: #2e7d32;
+}
+
 
 .card-inner {
   display: flex;
@@ -243,8 +270,7 @@ form[id="login-form"] {
   padding-bottom: 2em;
   background-color: #77176f;
 }
-@media (min-width: 1200px) {
-  .container{
-      max-width: 970px;
-  }
+
+a[type="payroll"]{
+  color:#ffffff
 }
