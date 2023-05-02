@@ -78,6 +78,7 @@ class Employee(models.Model):
     probation_commence = models.DateField(null=True, blank=True)
     probation_end = models.DateField(null=True, blank=True)
     warning = models.IntegerField(default=0)
+    suspensions = models.IntegerField(default=0)
 
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True)
     title = models.ForeignKey(Title, on_delete=models.CASCADE, null=True, blank=True)

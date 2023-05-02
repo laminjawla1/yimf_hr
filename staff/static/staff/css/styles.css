@@ -148,6 +148,14 @@ a.article-title:hover {
   border-radius: 5px;
 }
 
+.fired {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 25px;
+  border-radius: 5px;
+}
+
 .card:first-child {
   background-color: #2962ff;
 }
@@ -163,6 +171,25 @@ a.article-title:hover {
 .card:nth-child(4) {
   background-color: #d50000;
 }
+
+/* ------------------------- */
+.fired:first-child {
+
+  background-color: #2962ff;
+}
+
+.fired:nth-child(2) {
+  background-color: #ff6d00;
+}
+
+.fired:nth-child(3) {
+  background-color: #d50000;
+}
+
+.fired:nth-child(4) {
+  background-color: #2e7d32;
+}
+
 
 .card-inner {
   display: flex;

@@ -5,10 +5,10 @@ import csv
 
 
 def generate_employee_records(modeladmin, request, queryset):
-    headers  =["EMPLOYEE NAME", "NICKNAME", "DATE OF BIRTH", "PLACE OF BIRTH", "GENDER", "NATIONALITY", "MARITAL STATUS", "SPOUSE", "NATIONAL ID",
-                "PASSPORT", "DRIVERS LICENSE", "VOTERS ID", "ACCOUNT NAME", "BANK", "SWIFT CODE", "ACCOUNT NUMBER", "COUNTRY", "STREET", 
-                "CITY", "ZIP CODE", "CUG NUMBER", "MOBILE 1", "MOBILE 2", "PERSONAL EMAIL", "WORK EMAIL", "HIRED DATE", "RESIGNED DATE",
-                "CONTRACT COMMENCE", "CONTRACT END", "DEPARTMEN", "TITLE", "CLASSIFICATION"]
+    headers  =["EMPLOYEE NAME", "NICKNAME", "DATE OF BIRTH", "PLACE OF BIRTH", "GENDER", "NATIONALITY", "MARITAL STATUS", "SPOUSE", 
+               "NATIONAL ID", "PASSPORT", "DRIVERS LICENSE", "VOTERS ID", "ACCOUNT NAME", "BANK", "SWIFT CODE", "ACCOUNT NUMBER",
+                "COUNTRY", "STREET", "CITY", "ZIP CODE", "CUG NUMBER", "MOBILE 1", "MOBILE 2", "PERSONAL EMAIL", "WORK EMAIL", 
+                "HIRED DATE", "RESIGNED DATE", "CONTRACT COMMENCE", "CONTRACT END", "DEPARTMENT", "TITLE", "CLASSIFICATION"]
     
     response = HttpResponse(
         content_type='text/csv',
@@ -50,7 +50,7 @@ class EmployeeAdmin(admin.ModelAdmin):
         }),
         ('Job details', {
             'classes': ('collapse',),
-            'fields': ('department', 'classification', 'title', 'hired_date', 'resigned_date', 'contract_commence', 'contract_end', 'employment_status', 'probation_commence', 'probation_end', 'warning')
+            'fields': ('department', 'classification', 'title', 'hired_date', 'resigned_date', 'contract_commence', 'contract_end', 'employment_status', 'probation_commence', 'probation_end', 'warning', 'suspensions')
         }),
     )
     actions = [generate_employee_records]
