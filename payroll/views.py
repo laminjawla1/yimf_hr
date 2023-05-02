@@ -198,8 +198,7 @@ def staff_payslip(request):
                     messages.error(request, 'No recognize staff is associated with that payslip')
                     return HttpResponseRedirect(reverse('payrolls'))
             net_pay_in_words = inflect.engine()
-            net_pay_in_words = net_pay_in_words.number_to_words(round(payslip.net_pay, 2)).capitalize() + " dalasis"
-            net_pay_in_words = net_pay_in_words.replace("point zero", "")
+            net_pay_in_words = net_pay_in_words.number_to_words(int(payslip.net_pay)).capitalize() + " dalasis"
             total_deduction = payslip.icf + payslip.individual_sshfc + payslip.income_tax + payslip.staff_fin + payslip.deduction
             return render(request, 'payroll/payslip.html', {
                 'payslip': payslip, 'staff': staff, 'net_pay_in_words': net_pay_in_words, 'total_deduction': total_deduction
@@ -217,9 +216,7 @@ def render_payslip(request, payroll_id):
                 messages.error(request, 'No recognize staff is associated with that payslip')
                 return HttpResponseRedirect(reverse('payrolls'))
         net_pay_in_words = inflect.engine()
-        net_pay_in_words = net_pay_in_words.number_to_words(payslip.net_pay).capitalize() + " dalasis"
-        net_pay_in_words = net_pay_in_words.replace("point zero", "")
-        net_pay_in_words = net_pay_in_words.replace("zero two two", "")
+        net_pay_in_words = net_pay_in_words.number_to_words(int(payslip.net_pay)).capitalize() + " dalasis"
         total_deduction = payslip.icf + payslip.individual_sshfc + payslip.income_tax + payslip.staff_fin + payslip.deduction
         return render(request, 'payroll/payslip.html', {
             'payslip': payslip, 'staff': staff, 'net_pay_in_words': net_pay_in_words, 'total_deduction': total_deduction
