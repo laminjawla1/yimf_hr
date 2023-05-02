@@ -2,22 +2,9 @@
 {% load humanize %}
 {% block content %}
 <style>
-  /* body {
+  body {
     padding-right: 30%;
-  } */
-    /* Tablet */
-    @media (min-width:600px) {
-      body {
-          padding-right: 30%;
-        } 
-    }
-
-    /* Desktop */
-    @media (min-width:900px) {
-        body {
-          padding-right: 30%;
-        } 
-      }
+  }
 </style>
 <form action="{% url 'staff_payslip' %}" method="post" class="d-flex" role="search">
   {% csrf_token %}
@@ -56,19 +43,19 @@
     {% for payroll in payrolls %}
     <tr>
         <td><a type="payroll" href="{% url 'render_payslip' payroll.id %}">{{payroll.employee}}</a></td>
-        <td>{{payroll.basic_salary|floatformat:2|intcomma}}</td>
-        <td>{{payroll.medical_allowance|floatformat:2|intcomma}}</td>
-        <td>{{payroll.transport_allowance|floatformat:2|intcomma}}</td>
-        <td>{{payroll.responsibility_allowance|floatformat:2|intcomma}}</td>
-        <td>{{payroll.housing_allowance|floatformat:2|intcomma}}</td>
-        <td>{{payroll.gross_pay|floatformat:2|intcomma}}</td>
-        <td>{{payroll.income_tax|floatformat:2|intcomma}}</td>
-        <td>{{payroll.sshfc|floatformat:2|intcomma}}</td>
-        <td>{{payroll.individual_sshfc|floatformat:2|intcomma}}</td>
-        <td>{{payroll.deduction|floatformat:2|intcomma}}</td>
-        <td>{{payroll.staff_fin|floatformat:2|intcomma}}</td>
-        <td>{{payroll.icf|floatformat:2|intcomma}}</td>
-        <td>{{payroll.net_pay|floatformat:2|intcomma}}</td>
+        <td>{{payroll.basic_salary|floatformat:4|intcomma}}</td>
+        <td>{{payroll.medical_allowance|floatformat:4|intcomma}}</td>
+        <td>{{payroll.transport_allowance|floatformat:4|intcomma}}</td>
+        <td>{{payroll.responsibility_allowance|floatformat:4|intcomma}}</td>
+        <td>{{payroll.housing_allowance|floatformat:4|intcomma}}</td>
+        <td>{{payroll.gross_pay|floatformat:4|intcomma}}</td>
+        <td>{{payroll.income_tax|floatformat:4|intcomma}}</td>
+        <td>{{payroll.sshfc|floatformat:4|intcomma}}</td>
+        <td>{{payroll.individual_sshfc|floatformat:4|intcomma}}</td>
+        <td>{{payroll.deduction|floatformat:4|intcomma}}</td>
+        <td>{{payroll.staff_fin|floatformat:4|intcomma}}</td>
+        <td>{{payroll.icf|floatformat:4|intcomma}}</td>
+        <td>{{payroll.net_pay|floatformat:4|intcomma}}</td>
         <td>{{payroll.date|date:"F d, Y" }}</td>
         <td><a href="{% url 'update_payroll' payroll.id %}">Edit</a></td>
     </tr>
