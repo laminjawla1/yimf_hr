@@ -13,7 +13,7 @@ class Payroll(models.Model):
     responsibility_allowance = models.FloatField(default=0.0)
     housing_allowance = models.FloatField(default=0.0)
     gross_pay = models.FloatField(default=0.0)
-    income_tax = models.FloatField(default=0.0)
+    income_tax = models.FloatField(default=0.0, null=True, blank=False)
     sshfc = models.FloatField(default=0.0)
     individual_sshfc =  models.FloatField(default=0.0)
     deduction = models.FloatField(default=0.0, validators=[MinValueValidator(0)])
@@ -23,7 +23,7 @@ class Payroll(models.Model):
     deduction_type = models.CharField(max_length=50, blank=True, null=True)
     date = models.DateTimeField(null=False, default=timezone.now)
     staff_id = models.CharField(max_length=50, null=True, blank=True)
-    
+
     def __str__(self):
         return self.employee.employee_name
     
