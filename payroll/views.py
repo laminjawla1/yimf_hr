@@ -219,6 +219,7 @@ def render_payslip(request, payroll_id):
         net_pay_in_words = inflect.engine()
         net_pay_in_words = net_pay_in_words.number_to_words(payslip.net_pay).capitalize() + " dalasis"
         net_pay_in_words = net_pay_in_words.replace("point zero", "")
+        net_pay_in_words = net_pay_in_words.replace("zero two two", "")
         total_deduction = payslip.icf + payslip.individual_sshfc + payslip.income_tax + payslip.staff_fin + payslip.deduction
         return render(request, 'payroll/payslip.html', {
             'payslip': payslip, 'staff': staff, 'net_pay_in_words': net_pay_in_words, 'total_deduction': total_deduction
