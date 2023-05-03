@@ -9,10 +9,15 @@
 <form action="{% url 'staff_payslip' %}" method="post" class="d-flex" role="search">
   {% csrf_token %}
   <input list="employees" name="employee" id="employee" class="form-control me-2" type="search" placeholder="Staff Name" aria-label="Search">
-  <input name="staff_id" id="staff_id" class="form-control me-2" type="search" placeholder="Staff ID" aria-label="Search">
+  <input list="staff_ids" name="staff_id" id="staff_id" class="form-control me-2" type="search" placeholder="Staff ID" aria-label="Search">
   <datalist id="employees">
     {% for employee in employees %}
     <option value="{{ employee.employee_name }}">
+    {% endfor %}
+</datalist>
+  <datalist id="staff_ids">
+    {% for employee in employees %}
+    <option value="{{ employee.staff_id }}">
     {% endfor %}
 </datalist>
   <input class="form-control me-2" type="date" name="date">
