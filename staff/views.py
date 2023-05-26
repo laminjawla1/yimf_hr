@@ -19,10 +19,12 @@ def dashboard(request):
     contract = len(Employee.objects.filter(employment_status="Contract").all())
     independent_contract = len(Employee.objects.filter(employment_status="Independent Contract").all())
 
+    staffs = Employee.objects.all().order_by("-hired_date")[:5]
+
     return render(request, "staff/dashboard.html",{
         'total_staffs': total_staffs, 'full_time_staffs': full_time_staffs, 'part_time_staffs': part_time_staffs, 'probation': probation,
         'interns': interns, 'on_leave': on_leave, 'on_suspension': on_suspension, 'resigned': resigned, 'fired': fired, 'temporary': temporary,
-        'contract':contract, 'independent_contract': independent_contract
+        'contract':contract, 'independent_contract': independent_contract, 'staffs': staffs, 'current_page': 'dashboard'
     })
 
 @login_required
@@ -38,10 +40,12 @@ def staffs(request):
         paginator = paginator.page(1)
 
     return render(request, "staff/staffs.html", {
-        'staffs': paginator
+        'staffs': paginator, 'current_page': 'staffs'
     })
 
 @login_required
-def staff_profile(request):
-    staff = get_object_or_404(Employee, id=request.POST['id'])
-    return render(request, "staff/profile.html", {'staff': staff})
+def staff_profile(request, staff_id):
+    staff = get_object_or_404(Employee, id=staff_id)
+    return render(request, "staff/profile.html",{
+                    'staff': staff, 'current_page': 'staffs'
+                 })

@@ -36,7 +36,7 @@
         <title>Yonna Microfinance</title>
     {% endif %}
 </head>
-<body style="background-color: #b989ad;">
+<body style="background-color: #B1D4E0;">
 {% if user.is_authenticated %}
     <header class="site-header col-md-12">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
@@ -49,9 +49,21 @@
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="{% url 'admin:index' %}">Admin</a>
-                        <a class="nav-item nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-                        <a class="nav-item nav-link" href="{% url 'staffs' %}">Staffs</a>
-                        <a class="nav-item nav-link" href="{% url 'payrolls' %}">Payroll</a>
+                        {% if current_page == 'dashboard' %}
+                            <a class="nav-item nav-link active" href="{% url 'dashboard' %}">Dashboard</a>
+                        {% else %}
+                            <a class="nav-item nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                        {% endif %}
+                        {% if current_page == 'staffs' %}
+                            <a class="nav-item nav-link active" href="{% url 'staffs' %}">Staffs</a>
+                        {% else %}
+                            <a class="nav-item nav-link" href="{% url 'staffs' %}">Staffs</a>
+                        {% endif %}
+                        {% if current_page == 'payrolls' %}
+                            <a class="nav-item nav-link active" href="{% url 'payrolls' %}">Payroll</a>
+                        {% else %}
+                            <a class="nav-item nav-link" href="{% url 'payrolls' %}">Payroll</a>
+                        {% endif %}
                     </div>
                     <!-- Navbar Right Side -->
                     {% if user.is_authenticated %}
@@ -67,7 +79,7 @@
 {% endif %}
 <div class="flex-wrapper">
     <div class="container">
-        <main role="main" class="container">
+        <main role="main">
             <div class="row">
               <div class="col-md-12">
                 {% if messages %}

@@ -41,11 +41,7 @@
         <td>{{staff.cug_number}}</td>
         <td>{{staff.mobile_1}}</td>
         <td>
-            <form action="{% url 'staff_profile' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="hidden" name="id" value="{{ staff.id }}" />
-                <input class="btn btn-sm btn-success mt-2 mb-2" type="submit" value="View" />
-            </form>
+            <a class="btn btn-sm btn-success mt-2 mb-2" href="{% url 'staff_profile' staff.id %}">View</a>
         </td>
     </tr>
     {% endfor %}

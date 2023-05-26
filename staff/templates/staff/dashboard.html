@@ -1,110 +1,172 @@
 {% extends "staff/layout.html" %}
+{% load humanize %}
+{% load static %}
 {% block content %}
     <!-- Main -->
-    <main class="main-container">
-      <div class="main-cards">
-        <div class="card">
-            <div class="card-inner">
-              <h3>Total Staffs</h3>
-              <span class="material-icons-outlined">groups</span>
+    <div class="row">
+      <div class="col-md-9">
+        <main class="main-container">
+          <div class="main-cards">
+            <div class="card">
+                <div class="card-inner">
+                    <h3>Total Staffs</h3>
+                    <span class="material-icons-outlined">groups</span>
+                </div>
+                <h1>{{total_staffs}}</h1>
             </div>
-            <h1>{{total_staffs}}</h1>
-        </div>
 
-        <div class="card">
-            <div class="card-inner">
-              <h3>Full Time</h3>
-              <span class="material-icons-outlined">groups</span>
+            <div class="card">
+                <div class="card-inner">
+                    <h3>Full Time</h3>
+                    <span class="material-icons-outlined">groups</span>
+                </div>
+                <h1>{{full_time_staffs}}</h1>
             </div>
-            <h1>{{full_time_staffs}}</h1>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-              <h3>Part Time</h3>
-              <span class="material-icons-outlined">attach_money</span>
+    
+            <div class="card">
+                <div class="card-inner">
+                    <h3>Part Time</h3>
+                    <span class="material-icons-outlined">attach_money</span>
+                </div>
+                <h1>{{part_time_staffs}}</h1>
             </div>
-            <h1>{{part_time_staffs}}</h1>
-        </div>
-      </div>
-
-      <div class="main-cards1">
-        <div class="card">
-            <div class="card-inner">
-              <h3>Probation</h3>
-              <span class="material-icons-outlined">security</span>
-            </div>
-            <h1>{{probation}}</h1>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-              <h3>Interns</h3>
-              <span class="material-icons-outlined">groups</span>
-            </div>
-            <h1>{{interns}}</h1>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-              <h3>On Leave</h3>
-              <span class="material-icons-outlined">groups</span>
-            </div>
-            <h1>{{on_leave}}</h1>
-        </div>
-      </div>
-
-      <div class="main-cards2">
-          <div class="card">
-            <div class="card-inner">
-              <h3>Temporary</h3>
-              <span class="material-icons-outlined">low_priority</span>
-            </div>
-            <h1>{{temporary}}</h1>
-      </div>
-
-      <div class="card">
-        <div class="card-inner">
-          <h3>Contract</h3>
-          <span class="material-icons-outlined">perm_identity</span>
-        </div>
-        <h1>{{contract}}</h1>
-    </div>
-
-      <div class="card">
-        <div class="card-inner">
-          <h3>Independent Contract</h3>
-          <span class="material-icons-outlined">lock</span>
-        </div>
-        <h1>{{independent_contract}}</h1>
-      </div>
-    </div>
-    <div>
-
-      <div class="main-cards3">
-        <div class="fired">
-          <div class="card-inner">
-            <h3>Suspension</h3>
-            <span class="material-icons-outlined">warning</span>
           </div>
-          <h1>{{on_suspension}}</h1>
+    
+          <div class="main-cards">
+            <div class="card">
+                <div class="card-inner">
+                    <h3>Prob</h3>
+                    <span class="material-icons-outlined">security</span>
+                </div>
+                <h1>{{probation}}</h1>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <h3>Interns</h3>
+                    <span class="material-icons-outlined">groups</span>
+                </div>
+                <h1>{{interns}}</h1>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <h3>On Leave</h3>
+                    <span class="material-icons-outlined">groups</span>
+                </div>
+                <h1>{{on_leave}}</h1>
+            </div>
+          </div>
+    
+    
+          <div class="main-cards">
+            <div class="card">
+                <div class="card-inner">
+                    <h3>Temp</h3>
+                    <span class="material-icons-outlined">low_priority</span>
+                </div>
+                <h1>{{temporary}}</h1>
+            </div>
+            <div class="card">
+                <div class="card-inner">
+                    <h3>Contract</h3>
+                    <span class="material-icons-outlined">perm_identity</span>
+                </div>
+                <h1>{{contract}}</h1>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <h3>INDP Contract</h3>
+                    <span class="material-icons-outlined">lock</span>
+                </div>
+                <h1>{{independent_contract}}</h1>
+            </div>
+          </div>
+    
+          <div class="main-cards">
+              <div class="fired">
+                <div class="card-inner">
+                    <h3>Suspen</h3>
+                    <span class="material-icons-outlined">warning</span>
+                </div>
+                <h1>{{on_suspension}}</h1>
+              </div>
+    
+              <div class="fired">
+                  <div class="card-inner">
+                      <h3>Resigned</h3>
+                      <span class="material-icons-outlined">error</span>
+                  </div>
+                  <h1>{{resigned}}</h1>
+              </div>
+    
+              <div class="fired">
+                  <div class="card-inner">
+                      <h3>Fired</h3>
+                      <span class="material-icons-outlined">person_off</span>
+                  </div>
+                  <h1>{{fired}}</h1>
+              </div>
+          </div>
+        </main>
       </div>
-
-      <div class="fired">
-        <div class="card-inner">
-          <h3>Resigned</h3>
-          <span class="material-icons-outlined">error</span>
-        </div>
-        <h1>{{resigned}}</h1>
+      <div class="col-md-3 mb-5">
+        <span class="text-muted">Recent Hirings</span>
+        <span class="badge badge-secondary badge-pill">{{total_staffs}}</span>
+        {% for staff in staffs %}
+          <ul class="list-group mb-3">
+              <li class="list-group-item  justify-content-between lh-condensed">
+                <div class="row">
+                  <div class="col-md-4">
+                    <a href="{% url 'staff_profile' staff.id %}"><img class="rounded-circle article-img mx-auto d-block" src="{{ staff.image.url }}" width="25" height="25" alt="image"></a>
+                  </div>
+                  <div class="col-md-8">
+                    <a class="text-center mx-auto d-block" href="{% url 'staff_profile' staff.id %}">{{staff.employee_name|slice:"15"}}</a>
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <small class="text-muted text-nowrap text-center mx-auto d-block">{{staff.staff_id}}</small>
+                  </div>
+                  <div class="col-md-6">
+                      <small class="text-muted text-nowrap text-center mx-auto d-block">{{staff.title.name|slice:"18"}}</small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <small class="text-muted text-nowrap text-center mx-auto d-block">{{staff.department.name|slice:"17"}}</small>
+                  </div>
+                  <div class="col-md-6">
+                      <small class="text-muted text-nowrap text-center mx-auto d-block">{{staff.classification.name|slice:"17"}}</small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <small class="text-muted text-nowrap text-center mx-auto mt-2 d-block">{{staff.date_of_birth}}</small>
+                  </div>
+                  <div class="col-md-6">
+                      <small class="text-muted text-nowrap text-center mx-auto mt-2 d-block">{{staff.place_of_birth}}</small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <small class="text-muted text-nowrap text-center mx-auto mt-2 d-block">{{staff.hired_date}}</small>
+                  </div>
+                  <div class="col-md-6">
+                      <small class="text-muted text-nowrap text-center mx-auto mt-2 d-block">{{staff.country}}</small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-5">
+                      <small class="text-muted text-nowrap text-center mx-auto mt-2 d-block">{{staff.mobile_1}}</small>
+                  </div>
+                  <div class="col-md-7">
+                      <small class="text-muted text-nowrap text-center mx-auto mt-2 d-block overflow-hidden">{{staff.personal_email}}</small>
+                  </div>
+                </div>
+              </li>
+          </ul>
+        {% endfor %}
+      </div>
     </div>
-
-      <div class="fired">
-        <div class="card-inner">
-          <h3>Fired</h3>
-          <span class="material-icons-outlined">person_off</span>
-        </div>
-        <h1>{{fired}}</h1>
-    </div>
-    <div>
-    </main>
 {% endblock content %}
