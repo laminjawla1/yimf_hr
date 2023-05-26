@@ -19,7 +19,7 @@ def dashboard(request):
     contract = len(Employee.objects.filter(employment_status="Contract").all())
     independent_contract = len(Employee.objects.filter(employment_status="Independent Contract").all())
 
-    staffs = Employee.objects.all().order_by("-hired_date")[:5]
+    staffs = Employee.objects.all().order_by("-hired_date")[:4]
 
     return render(request, "staff/dashboard.html",{
         'total_staffs': total_staffs, 'full_time_staffs': full_time_staffs, 'part_time_staffs': part_time_staffs, 'probation': probation,
