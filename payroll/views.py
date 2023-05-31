@@ -43,14 +43,13 @@ def payrolls(request):
             form.save()
             messages.success(request, "Payroll added successfully 😊")
         if filter_form.is_valid():
-            if filter_form.cleaned_data.get('employee') or filter_form.cleaned_data.get('staff_id') or filter_form.cleaned_data.get('date'):
+            if filter_form.cleaned_data.get('staff') or filter_form.cleaned_data.get('staff_id') or filter_form.cleaned_data.get('date'):
                 _date = filter_form.cleaned_data.get('date')
                 if _date:
                     payrolls = Payroll.objects.filter(date__year=_date.year, date__month=_date.month).all()
-                payrolls = payrolls.filter(employee__employee_name__icontains=filter_form.cleaned_data.get('employee'),
+                payrolls = payrolls.filter(employee__employee_name__icontains=filter_form.cleaned_data.get('staff'),
                                                     employee__staff_id__icontains=filter_form.cleaned_data.get('staff_id')).all()
     
-    employees = Employee.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(payrolls, 8)
 
@@ -79,7 +78,7 @@ def payrolls(request):
         'payrolls': paginator, 'basic_total': basic_total, 'medical_total': medical_total, 'transport_total': transport_total,
         'responsibility_total': responsibility_total, 'housing_total': housing_total, 'gross_total': gross_total, 'income_total': income_total,
         'sshfc_total': sshfc_total, 'individual_sshfc_total': individual_sshfc_total, 'deduction_total': deduction_total, 'icf_total': icf_total,
-        'net_total': net_total, 'absolute_total': absolute_total, 'staff_fin_total': staff_fin, 'employees': employees,
+        'net_total': net_total, 'absolute_total': absolute_total, 'staff_fin_total': staff_fin,
         'current_page': 'payrolls', 'form': PayrollForm, 'legend': 'Add Payroll', 'button': 'Add', 'filter_form': FilterPayrollForm,
     })
 

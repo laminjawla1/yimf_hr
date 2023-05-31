@@ -5,6 +5,7 @@ body {
   font-family: 'Poppins';
   align-items: center;
   justify-content: center;
+  background-color: #B1D4E0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -129,14 +130,14 @@ a.article-title:hover {
 
 .main-cards2 {
   display: grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
   margin: 10px 0;
 }
 
 .main-cards3 {
   display: grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
   margin: 10px 0;
 }
@@ -200,6 +201,7 @@ a.article-title:hover {
 .card-inner > .material-icons-outlined {
   font-size: 45px;
 }
+
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
