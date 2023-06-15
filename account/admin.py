@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class UserProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
+    fk_name = "user"
 
 class AccountsUserAdmin(AuthUserAdmin):
     def add_view(self, *args, **kwargs):

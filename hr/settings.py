@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "account",
     "crispy_forms",
     "crispy_bootstrap4",
+    "leave_roster",
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,11 @@ LOGIN_REDIRECT_URL = "dashboard"
 LOGIN_URL = 'login'
 
 SESSION_EXPIRE_SECONDS = 3600
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=os.environ.get("google_email")
+EMAIL_HOST_PASSWORD=os.environ.get("google_password")
+SERVER_EMAIL = EMAIL_HOST_USER

@@ -10,6 +10,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("staff.urls")),
     path("payroll/", include("payroll.urls")),
+    path("leave_roster/", include("leave_roster.urls")),
 
     path("profile/", account_views.profile, name="profile"),
     path("login/", auth_views.LoginView.as_view(template_name="account/login.html"), name="login"),

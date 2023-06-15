@@ -1,0 +1,139 @@
+{% extends "staff/layout.html" %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<style>
+    td, th {
+        text-align: center;
+    }
+</style>
+<div class="container mt-1 mb-5 border border-secondary rounded col-md-8" style="background-color: white;">
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{leave.staff.profile.staff_profile.image.url}}" width='110' height='110'>
+        </div>
+        <div class="col-md-4">
+            <h4 class="fw-bold text-center">LEAVE</h4>
+            <h6 class="fw-bold text-center">{{leave.date_applied|date:"F d, Y"}}</h6>
+        </div>
+        <div class="col-md-4 d-md-flex justify-content-md-end">
+            <img src="{% static 'staff/images/fevicon.png' %}" width='105' height='105' class="rounded-circle">
+        </div>
+    </div>
+    <strong><P class="text-center text-muted mt-3 border-bottom mb-4">STAFF INFO</P></strong>
+    <div class="row">
+        <div class="col-md-4">
+            <div> <span class="fw-bolder">ID</span> <small class="ms-3">{{leave.staff.profile.staff_profile.staff_id}}</small> </div>
+        </div>
+        <div class="col-md-4">
+            <div> <span class="fw-bolder">Fullname</span> <small class="ms-3">{{leave.staff.profile.staff_profile.employee_name}}</small> </div>
+        </div>
+        <div class="col-md-4">
+            <div> <span class="fw-bolder">Phone</span> <small class="ms-3">{{leave.staff.profile.staff_profile.mobile_1}}</small> </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div> <span class="fw-bolder">Title</span> <small class="ms-3">{{leave.staff.profile.staff_profile.title}}</small> </div>
+        </div>
+        <div class="col-md-4">
+            <div> <span class="fw-bolder">Department</span> <small class="ms-3">{{leave.staff.profile.staff_profile.department}}</small> </div>
+        </div>
+        <div class="col-md-4">
+            <div> <span class="fw-bolder">Classification</span> <small class="ms-3">{{leave.staff.profile.staff_profile.classification}}</small> </div>
+        </div>
+    </div>
+    <strong><P class="text-center text-muted mt-3 border-bottom mb-4">LEAVE DETAILS</P></strong>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col"><strong>TYPE</strong></th>
+                        <th scope="col"><strong>STATUS</strong></th>
+                        <th scope="col"><strong>REASON</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{leave.type_of_leave}}</td>
+                        <td>{{leave.status}}</td>
+                        <td>{{leave.leave_reason|slice:56}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <strong><P class="text-center text-muted mt-3 border-bottom mb-4">LEAVE DATES</P></strong>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col"><strong>NUMBER OF DAYS</strong></th>
+                        <th scope="col"><strong>START DATE</strong></th>
+                        <th scope="col"><strong>END DATE</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{leave.number_of_days}}</td>
+                        <td>{{leave.start_date}}</td>
+                        <td>{{leave.end_date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <strong><P class="text-center text-muted mt-3 border-bottom mb-4">LEAVE BALANCE</P></strong>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col"><strong>DAYS TAKEN</strong></th>
+                        <th scope="col"><strong>BALANCE</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{leave.staff.profile.staff_profile.total_leave_days_taken}}</td>
+                        <td>{{leave.staff.profile.staff_profile.total_leave_balance}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <strong><P class="text-center text-muted mt-3 border-bottom mb-4">APPROVAL</P></strong>
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <div> <span class="fw-bolder"><u>Applicant</u></span></div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div> <span class="fw-bolder"><u>Supervisor</u></span></div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div> <span class="fw-bolder"><u>HOD</u></span></div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div> <span class="fw-bolder"><u>HR</u></span></div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-3 text-center">
+            <div> <span>.......................................</span></div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div> <span>.......................................</span></div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div> <span>.......................................</span></div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div> <span>.......................................</span></div>
+        </div>
+    </div>
+    <br>
+</div>
+{% endblock content %}

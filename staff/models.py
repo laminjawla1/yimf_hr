@@ -3,8 +3,9 @@ from section.models import Department, Title, Classification
 from PIL import Image
 import requests
 
-data = requests.get("https://restcountries.com/v3.1/all").json()
-countries = [(d['name']['common'], d['name']['common']) for d in data]
+# data = requests.get("https://restcountries.com/v3.1/all").json()
+# countries = [(d['name']['common'], d['name']['common']) for d in data]
+countries = []
 
 class Skill(models.Model):
     name = models.CharField(max_length=50)
@@ -83,6 +84,11 @@ class Employee(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True, blank=True)
     title = models.ForeignKey(Title, on_delete=models.CASCADE, null=True, blank=True)
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True, blank=True)
+
+    # Leave Details
+    total_days_of_leave = models.IntegerField(default=0)
+    total_leave_days_taken = models.IntegerField(default=0)
+    total_leave_balance = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return self.employee_name
