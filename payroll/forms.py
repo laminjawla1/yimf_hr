@@ -8,7 +8,7 @@ class PayrollForm(forms.ModelForm):
         self.fields['employee'].queryset = Employee.objects.all().exclude(employment_status__in=["Resigned", "Fired"]).order_by("employee_name")
     class Meta:
         model = Payroll
-        fields = ['employee', 'basic_salary', 'income_tax', 'staff_fin', 'deduction', 'deduction_type']
+        fields = ['employee', 'risk_allowance', 'basic_salary', 'income_tax', 'staff_fin', 'deduction', 'deduction_type']
 
 class FilterPayrollForm(forms.Form):
     staff = forms.CharField(label="", max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Employee'}))

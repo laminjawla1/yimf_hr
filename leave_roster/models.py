@@ -23,6 +23,7 @@ class LeaveRoster(models.Model):
     number_of_days = models.IntegerField()
 
     status = models.TextField(choices=[
+        ('Applicant', 'Applicant'),
         ('Immediate Supervisor', 'Immediate Supervisor'),
         ('Head Of Department', 'Head Of Department'),
         ('Rejected', 'Rejected'),

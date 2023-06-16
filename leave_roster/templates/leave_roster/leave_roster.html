@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load humanize %}
 {% block content %}
-{% if user.is_superuser %}
+{% if user.is_staff %}
 <div class="row">
     <div class="col-md-12">
         <form method="post">
@@ -27,14 +27,23 @@
     </div>
 </div>
 {% endif %}
+{% if user.profile.is_hod or user.profile.is_supervisor or user.is_staff %}
 <div class="row">
   <div class="col-md-6 text-center">
     <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#payrollModal" data-bs-whatever="@mdo" href="#">Take a Leave</a>
   </div>
   <div class="col-md-6 text-center">
-    <a class="btn btn-warning text-white" href="#">Leave Requests</a>
+    <a class="btn btn-warning text-white" href="{% url 'leave_requests' %}">Leave Requests</a>
   </div>
 </div>
+{% else %}
+<div class="row">
+  <div class="col-md-12 text-center">
+    <a class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#payrollModal" data-bs-whatever="@mdo" href="#">Take a Leave</a>
+  </div>
+</div>
+{% endif %}
+{% if leave_roster %}
 <table class="table table-striped table-bordered table-dark table-striped-columns table-responsive-sm">
     <thead class="thead-dark">
     <tr>
@@ -67,15 +76,16 @@
 
 {% for num in leave_roster.paginator.page_range %}
 {% if leave_roster.number == num %}
-  <a class="btn btn-info mb-4" href="{% url 'leave_roster' %}?page={{ num }}">{{ num }}</a>
+<a class="btn btn-info mb-4" href="{% url 'leave_roster' %}?page={{ num }}">{{ num }}</a>
 {% elif num > leave_roster.number|add:'-3' and num < leave_roster.number|add:'3' %}
   <a class="btn btn-outline-info mb-4" href="{% url 'leave_roster' %}?page={{ num }}">{{ num }}</a>
-{% endif %}
-{% endfor %}
+  {% endif %}
+  {% endfor %}
 
 {% if leave_roster.has_next %}
 <a class="btn btn-outline-info mb-4" href="{% url 'leave_roster' %}?page={{ leave_roster.next_page_number }}">Next</a>
 <a class="btn btn-outline-info mb-4" href="{% url 'leave_roster' %}?page={{ leave_roster.paginator.num_pages }}">Last</a>
+{% endif %}
 {% endif %}
 <div class="modal fade" id="payrollModal" tabindex="-1" aria-labelledby="payrollModalLabel" aria-hidden="true">
     <div class="modal-dialog">

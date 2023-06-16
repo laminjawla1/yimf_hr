@@ -276,3 +276,11 @@ form[id="login-form"] {
 a[type="payroll"]{
   color:#ffffff
 }
+
+td, th {
+  text-align: center;
+}
+
+.logout-btn:hover {
+  display: inline;
+}

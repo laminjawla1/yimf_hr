@@ -49,21 +49,23 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href="{% url 'admin:index' %}">Admin</a>
-                        {% if current_page == 'dashboard' %}
-                            <a class="nav-item nav-link active" href="{% url 'dashboard' %}">Dashboard</a>
-                        {% else %}
-                            <a class="nav-item nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-                        {% endif %}
-                        {% if current_page == 'staffs' %}
-                            <a class="nav-item nav-link active" href="{% url 'staffs' %}">Staffs</a>
-                        {% else %}
-                            <a class="nav-item nav-link" href="{% url 'staffs' %}">Staffs</a>
-                        {% endif %}
-                        {% if current_page == 'payrolls' %}
-                            <a class="nav-item nav-link active" href="{% url 'payrolls' %}">Payroll</a>
-                        {% else %}
-                            <a class="nav-item nav-link" href="{% url 'payrolls' %}">Payroll</a>
+                        {% if user.is_staff %}
+                            <a class="nav-item nav-link" href="{% url 'admin:index' %}">Admin</a>
+                            {% if current_page == 'dashboard' %}
+                                <a class="nav-item nav-link active" href="{% url 'dashboard' %}">Dashboard</a>
+                            {% else %}
+                                <a class="nav-item nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                            {% endif %}
+                            {% if current_page == 'staffs' %}
+                                <a class="nav-item nav-link active" href="{% url 'staffs' %}">Staffs</a>
+                            {% else %}
+                                <a class="nav-item nav-link" href="{% url 'staffs' %}">Staffs</a>
+                            {% endif %}
+                            {% if current_page == 'payrolls' %}
+                                <a class="nav-item nav-link active" href="{% url 'payrolls' %}">Payroll</a>
+                            {% else %}
+                                <a class="nav-item nav-link" href="{% url 'payrolls' %}">Payroll</a>
+                            {% endif %}
                         {% endif %}
                         {% if current_page == 'leave_roster' %}
                             <a class="nav-item nav-link active" href="{% url 'leave_roster' %}">Leave Roster</a>

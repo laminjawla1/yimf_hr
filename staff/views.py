@@ -3,9 +3,13 @@ from .models import Employee
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 @login_required
 def dashboard(request):
+    if not request.user.is_staff:
+        return HttpResponseRedirect(reverse('leave_roster'))
     total_staffs = len(Employee.objects.all())
     full_time_staffs = len(Employee.objects.filter(employment_status="Full Time").all())
     part_time_staffs = len(Employee.objects.filter(employment_status="Part Time").all())

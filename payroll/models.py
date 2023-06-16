@@ -12,6 +12,7 @@ class Payroll(models.Model):
     transport_allowance = models.FloatField(default=0.0)
     responsibility_allowance = models.FloatField(default=0.0)
     housing_allowance = models.FloatField(default=0.0)
+    risk_allowance = models.FloatField(default=0.0)
     gross_pay = models.FloatField(default=0.0)
     income_tax = models.FloatField(default=0.0, null=True, blank=False)
     sshfc = models.FloatField(default=0.0)

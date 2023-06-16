@@ -3,9 +3,8 @@ from section.models import Department, Title, Classification
 from PIL import Image
 import requests
 
-# data = requests.get("https://restcountries.com/v3.1/all").json()
-# countries = [(d['name']['common'], d['name']['common']) for d in data]
-countries = []
+data = requests.get("https://restcountries.com/v3.1/all").json()
+countries = [(d['name']['common'], d['name']['common']) for d in data]
 
 class Skill(models.Model):
     name = models.CharField(max_length=50)
