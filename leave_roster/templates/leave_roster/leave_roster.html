@@ -64,7 +64,9 @@
         <td>{{leave.end_date|date:"F d, Y"}}</td>
         <td>{{leave.number_of_days}}</td>
         <td>{{leave.status}}</td>
-        <td><a href="">Edit</a></td>
+        {% if leave.staff == user and not leave.approved %}
+          <td><a href="">Edit</a></td>
+        {% endif %}
     </tr>
     {% endfor %}
 </tbody>

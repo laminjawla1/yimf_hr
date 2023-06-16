@@ -73,7 +73,10 @@ Link to the leave request: {request.build_absolute_uri()}
 def leave_requests(request):
     #     leave_roster = LeaveRoster.objects.filter(staff=request.user).order_by('-date_applied')
     if request.user.profile.is_supervisor:
-        leave_roster = LeaveRoster.objects.filter(staff__profile__immediate_supervisor=request.user).order_by('-date_applied')
+        leave_roster = LeaveRoster.objects.filter(
+            staff__profile__immediate_supervisor=request.user,
+            status="Immediate Supervisor"
+        ).order_by('-date_applied')
     elif request.user.is_hod:
         leave_roster = LeaveRoster.objects.filter(staff__profile__staff_profile__department_head=request.user).order_by('-date_applied')
     else:
