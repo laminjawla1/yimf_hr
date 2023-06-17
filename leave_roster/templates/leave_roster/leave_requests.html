@@ -77,21 +77,21 @@
 </tbody>
 </table>
 {% if leave_roster.has_previous %}
-<a class="btn btn-outline-info mb-4" href="{% url 'leave_roster' %}?page=1">First</a>
-<a class="btn btn-outline-info mb-4" href="{% url 'leave_roster' %}?page={{ leave_roster.previous_page_number }}">Previous</a>
+<a class="btn btn-outline-info mb-4" href="{% url 'leave_requests' %}?page=1">First</a>
+<a class="btn btn-outline-info mb-4" href="{% url 'leave_requests' %}?page={{ leave_roster.previous_page_number }}">Previous</a>
 {% endif %}
 
 {% for num in leave_roster.paginator.page_range %}
 {% if leave_roster.number == num %}
-<a class="btn btn-info mb-4" href="{% url 'leave_roster' %}?page={{ num }}">{{ num }}</a>
+<a class="btn btn-info mb-4" href="{% url 'leave_requests' %}?page={{ num }}">{{ num }}</a>
 {% elif num > leave_roster.number|add:'-3' and num < leave_roster.number|add:'3' %}
-  <a class="btn btn-outline-info mb-4" href="{% url 'leave_roster' %}?page={{ num }}">{{ num }}</a>
+  <a class="btn btn-outline-info mb-4" href="{% url 'leave_requests' %}?page={{ num }}">{{ num }}</a>
   {% endif %}
   {% endfor %}
 
 {% if leave_roster.has_next %}
-<a class="btn btn-outline-info mb-4" href="{% url 'leave_roster' %}?page={{ leave_roster.next_page_number }}">Next</a>
-<a class="btn btn-outline-info mb-4" href="{% url 'leave_roster' %}?page={{ leave_roster.paginator.num_pages }}">Last</a>
+<a class="btn btn-outline-info mb-4" href="{% url 'leave_requests' %}?page={{ leave_roster.next_page_number }}">Next</a>
+<a class="btn btn-outline-info mb-4" href="{% url 'leave_requests' %}?page={{ leave_roster.paginator.num_pages }}">Last</a>
 {% endif %}
 {% endif %}
 <div class="modal fade" id="payrollModal" tabindex="-1" aria-labelledby="payrollModalLabel" aria-hidden="true">

@@ -2,6 +2,7 @@ from django.db import models
 from staff.models import Employee
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.urls import reverse
 
 # Create your models here.
 class LeaveRoster(models.Model):
@@ -28,9 +29,13 @@ class LeaveRoster(models.Model):
         ('Head Of Department', 'Head Of Department'),
         ('Rejected', 'Rejected'),
         ('Approved', 'Approved'),
-        ('Pending', 'Pending'),
+        ('HR Office', 'HR Office'),
     ])
     approved = models.BooleanField(default=False)
     date_applied = models.DateTimeField(default=timezone.now)
+
     def __str__(self) -> str:
         return f"{self.staff.first_name} {self.staff.last_name}"
+    
+    def get_absolute_url(self):
+        return reverse('leave_roster')

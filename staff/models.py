@@ -85,8 +85,8 @@ class Employee(models.Model):
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True, blank=True)
 
     # Leave Details
-    total_days_of_leave = models.IntegerField(default=0)
-    total_leave_days_taken = models.IntegerField(default=0)
+    total_days_of_leave_taken = models.IntegerField(default=0)
+    total_annual_leave_days_taken = models.IntegerField(default=0)
     total_leave_balance = models.IntegerField(default=0)
 
     def __str__(self) -> str:

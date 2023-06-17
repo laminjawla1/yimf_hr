@@ -11,6 +11,7 @@ class Profile(models.Model):
     immediate_supervisor = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name="immediate_supervisor")
     is_supervisor = models.BooleanField(default=False, null=True, blank=True)
     is_hod = models.BooleanField(default=False, null=True, blank=True)
+    is_hr = models.BooleanField(default=False, null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"
