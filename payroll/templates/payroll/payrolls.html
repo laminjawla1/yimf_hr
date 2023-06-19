@@ -30,6 +30,7 @@
         </form>
     </div>
 </div>
+{% if user.is_superuser %}
 <small><a class="btn btn-primary btn-block btn-sm" data-bs-toggle="modal" data-bs-target="#payrollModal" data-bs-whatever="@mdo" href="#">Add Payroll</a></small>
   <div class="modal fade" id="payrollModal" tabindex="-1" aria-labelledby="payrollModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -53,6 +54,7 @@
       </div>
     </div>
   </div>
+{% endif %}
 <table class="table table-striped table-bordered table-dark table-striped-columns table-responsive-sm">
     <thead class="thead-dark">
     <tr>
@@ -81,7 +83,9 @@
         <td>{{payroll.gross_pay|floatformat:2|intcomma}}</td>
         <td>{{payroll.net_pay|floatformat:2|intcomma}}</td>
         <td>{{payroll.date|date:"F d, Y" }}</td>
-        <td><a href="{% url 'update_payroll' payroll.id %}">Edit</a></td>
+        {% if user.is_superuser %}
+          <td><a href="{% url 'update_payroll' payroll.id %}">Edit</a></td>
+        {% endif %}
     </tr>
     {% endfor %}
     <tr>

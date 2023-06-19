@@ -84,7 +84,7 @@ def payrolls(request):
 
 class UpdatePayrollView(LoginRequiredMixin, UpdateView):
     model = Payroll
-    fields = ['employee', 'basic_salary', 'income_tax', 'staff_fin', 'deduction', 'deduction_type']
+    fields = ['employee', 'risk_allowance', 'basic_salary', 'income_tax', 'staff_fin', 'deduction', 'deduction_type']
 
     def form_valid(self, form):
         form.instance.staff_id = form.instance.employee.staff_id

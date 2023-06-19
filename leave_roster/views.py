@@ -260,6 +260,8 @@ class UpdateLeave(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return not leave.approved and leave.staff == self.request.user
     
     def get_context_data(self, *args, **kwargs):
+        if not self.request.user.is_superuser:
+            raise PermissionDenied()
         context = super(UpdateLeave, self).get_context_data(*args, **kwargs)
         context['button'] = 'Update'
         context['legend'] = 'Update Leave'
