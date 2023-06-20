@@ -235,6 +235,7 @@ Link to the leave request: {request.build_absolute_uri()}
                         leave.staff.profile.staff_profile.total_annual_leave_days_taken += leave.number_of_days
                 leave.staff.profile.staff_profile.total_days_of_leave_taken += leave.number_of_days
                 leave.save()
+                leave.staff.profile.save()
                 messages.success(request, f"Leave {status.lower()} successfully.")
 
 
