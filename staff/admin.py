@@ -38,7 +38,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     filter_by = ['staff_id', 'employee_name','nickname', 'country', 'date_of_birth', 'place_of_birth', 'gender', 'nationality', 'work_email',
                   'hired_date', 'emp_status']
     list_filter = ['place_of_birth', 'gender', 'nationality', 'hired_date', 'employment_status']
-    readonly_fields = ['total_days_of_leave_taken', 'total_annual_leave_days_taken']
+    # readonly_fields = ['total_days_of_leave_taken', 'total_annual_leave_days_taken']
 
     fieldsets = (
         ('Personal Details', {
