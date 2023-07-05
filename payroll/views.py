@@ -1,19 +1,23 @@
-from django.shortcuts import render
-from .models import Payroll
+import csv
+from datetime import datetime
+
+import inflect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import UpdateView
-from django.contrib import messages
-from django.utils import timezone
 from django.db.models import Sum
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
+from django.utils import timezone
+from django.views.generic import UpdateView
 from staff.models import Employee
-from datetime import datetime
-from .forms import PayrollForm, FilterPayrollForm
-import inflect
+
+from .forms import FilterPayrollForm, PayrollForm
+from .models import Payroll
+
 
 @login_required
 def payrolls(request):
@@ -23,6 +27,34 @@ def payrolls(request):
         date__year=timezone.now().year, date__month=timezone.now().month
     ).order_by('-net_pay')
     if request.method == 'POST':
+        if request.POST.get('from_date') and request.POST.get('to_date'):
+            from_date = request.POST.get('from_date')
+            to_date = request.POST.get('to_date')
+            items = Payroll.objects.filter(
+                date__gte=datetime.strptime(from_date, '%Y-%m-%d'),
+                date__lte=datetime.strptime(to_date, '%Y-%m-%d'),
+            ).order_by('date')
+            if not items:
+                messages.error(request, "No payroll is available for download")
+                return HttpResponseRedirect(reverse("payrolls"))
+            headers = ["EMPLOYEE", "BASIC SALARY", "MEDICAL ALLOWANCE", "TRANSPORT ALLOWANCE", "RESPONSIBILITY ALLOWANCE",
+                       "HOUSING ALLOWANCE", "RISK ALLOWANCE", "SSHFC", "INDIVIDUAL SSHFC", "ICF", "INCOME TAX", "DEDUCTION",
+                       "DEDUCTION TYPE", "STAFF FINANCING", "GROSS PAY", "NET PAY", "DATE"
+            ]
+            
+            response = HttpResponse(
+                content_type='text/csv',
+                headers = {'Content-Disposition': f'attachment; filename="yimf_payroll_{from_date}_to_{to_date}.csv"'},
+            )
+            writer = csv.writer(response)
+            writer.writerow([f"YONNA ISLAMIC MICROFINANCE PAYROLL - {from_date} TO {to_date}"])
+            writer.writerow(headers)
+            for w in items:
+                writer.writerow([w.employee.employee_name, w.basic_salary, w.medical_allowance, w.transport_allowance,
+                                w.responsibility_allowance, w.housing_allowance, w.risk_allowance, w.sshfc,
+                                w.individual_sshfc, w.icf, w.income_tax, w.deduction, w.deduction_type,
+                                w.staff_fin, w.gross_pay, w.net_pay, w.date.strftime("%Y-%m-%d")])
+            return response
         form = PayrollForm(request.POST)
         filter_form = FilterPayrollForm(request.POST)
         if form.is_valid():
