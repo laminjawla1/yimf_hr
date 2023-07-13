@@ -21,8 +21,6 @@ from .models import Payroll
 
 @login_required
 def payrolls(request):
-    if not request.user.is_superuser:
-        raise PermissionDenied()
     payrolls = Payroll.objects.filter(
         date__year=timezone.now().year, date__month=timezone.now().month
     ).order_by('-net_pay')
@@ -136,6 +134,8 @@ class UpdatePayrollView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
     
     def get_context_data(self, *args, **kwargs):
+        if not self.request.user.is_superuser:
+            raise PermissionDenied()
         context = super(UpdatePayrollView, self).get_context_data(*args, **kwargs)
         context['button'] = 'Update'
         context['legend'] = 'Update Payroll'
