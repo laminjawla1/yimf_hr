@@ -30,11 +30,8 @@
 {% endif %}
 {% if user.profile.is_hod or user.profile.is_supervisor or user.is_staff %}
 <div class="row">
-  <div class="col-md-6 text-center">
-    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#payrollModal" data-bs-whatever="@mdo" href="#">Take a Leave</a>
-  </div>
-  <div class="col-md-6 text-center">
-    <a class="btn btn-warning text-white" href="{% url 'leave_requests' %}">Leave Requests</a>
+  <div class="col-md-12 text-center">
+    <a class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#payrollModal" data-bs-whatever="@mdo" href="#">Add a Leave Request</a>
   </div>
 </div>
 {% else %}
@@ -59,7 +56,7 @@
   <tbody>
     {% for leave in leave_roster %}
     <tr>
-        <td><a type="payroll" href="{% url 'leave_detail' leave.id %}">{{leave.staff.first_name}} {{leave.staff.last_name}}</a></td>
+        <td><a type="payroll" href="{% url 'leave_detail' leave.id %}">{{leave.staff.employee_name}}</a></td>
         <td>{{leave.type_of_leave}}</td>
         <td>{{leave.start_date|date:"F d, Y"}}</td>
         <td>{{leave.end_date|date:"F d, Y"}}</td>
@@ -69,9 +66,7 @@
         {% else %}
           <td>{{leave.status}}</td>
         {% endif %}
-        {% if leave.staff == user and not leave.approved %}
-          <td><a href="{% url 'apply_leave' leave.id %}">Edit</a></td>
-        {% endif %}
+        <td><a href="{% url 'apply_leave' leave.id %}">Edit</a></td>
     </tr>
     {% endfor %}
 </tbody>
@@ -98,7 +93,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="payrollModalLabel">Taking A Leave</h1>
+          <h1 class="modal-title fs-5" id="payrollModalLabel">Adding a Leave Request</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body content-section">
@@ -109,7 +104,7 @@
             </fieldset>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Take A Leave</button>
+              <button type="submit" class="btn btn-primary">Add Leave Request</button>
             </div>
         </form>
         </div>

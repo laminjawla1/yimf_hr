@@ -11,7 +11,7 @@
     <br>
     <div class="row">
         <div class="col-md-4">
-            <img src="{{leave.staff.profile.staff_profile.image.url}}" width='110' height='110'>
+            <img src="{{leave.staff.image.url}}" width='110' height='110'>
         </div>
         <div class="col-md-4">
             <h5 class="fw-bold text-center">YIMF LEAVE ROSTER</h5>
@@ -24,24 +24,24 @@
     <strong><P class="text-center text-muted mt-3 border-bottom mb-4">STAFF INFO</P></strong>
     <div class="row">
         <div class="col-md-4">
-            <div> <span>ID</span> <small class="ms-3 fw-bolder">{{leave.staff.profile.staff_profile.staff_id}}</small> </div>
+            <div> <span>ID</span> <small class="ms-3 fw-bolder">{{leave.staff.staff_id}}</small> </div>
         </div>
         <div class="col-md-4">
-            <div> <span>Fullname</span> <small class="ms-3 fw-bolder"">{{leave.staff.profile.staff_profile.employee_name}}</small> </div>
+            <div> <span>Fullname</span> <small class="ms-3 fw-bolder"">{{leave.staff.employee_name}}</small> </div>
         </div>
         <div class="col-md-4">
-            <div> <span class="">Phone</span> <small class="ms-3 fw-bolder">{{leave.staff.profile.staff_profile.mobile_1}}</small> </div>
+            <div> <span class="">Phone</span> <small class="ms-3 fw-bolder">{{leave.staff.mobile_1}}</small> </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div> <span class="">Title</span> <small class="ms-3 fw-bolder">{{leave.staff.profile.staff_profile.title}}</small> </div>
+            <div> <span class="">Title</span> <small class="ms-3 fw-bolder">{{leave.staff.title}}</small> </div>
         </div>
         <div class="col-md-4">
-            <div> <span class="">Department</span> <small class="ms-3 fw-bolder">{{leave.staff.profile.staff_profile.department}}</small> </div>
+            <div> <span class="">Department</span> <small class="ms-3 fw-bolder">{{leave.staff.department}}</small> </div>
         </div>
         <div class="col-md-4">
-            <div> <span class="">Classification</span> <small class="ms-3 fw-bolder">{{leave.staff.profile.staff_profile.classification}}</small> </div>
+            <div> <span class="">Classification</span> <small class="ms-3 fw-bolder">{{leave.staff.classification}}</small> </div>
         </div>
     </div>
     <strong><P class="text-center text-muted mt-3 border-bottom mb-4">LEAVE DETAILS</P></strong>
@@ -100,8 +100,8 @@
                 <tbody>
                     <tr>
                         <td>{{leave.number_of_days}}</td>
-                        <td>{{leave.staff.profile.staff_profile.total_leave_balance}}</td>
-                        <td>{{leave.staff.profile.staff_profile.total_annual_leave_days_taken}}</td>
+                        <td>{{leave.staff.total_leave_balance}}</td>
+                        <td>{{leave.staff.total_annual_leave_days_taken}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -137,106 +137,26 @@
         </div>
     </div>
     <br>
-    {% if not leave.approved %}
-        {% if leave.status == "Applicant" and user == leave.staff %}
-            <div class="row container">
-                <div class="col-md-12">
-                <form method="post" class="d-flex" role="search">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <input type="hidden" name="leave_id" value="{{leave.id}}">
-                        <div class="mb-3 form-group col-md-6">
-                            <textarea name="email_message" placeholder="Message" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <select name="status" class="form-select" aria-label="Default select example" required>
-                                <option selected disabled>Change Status</option>
-                                <option value="Immediate Supervisor">Immediate Supervisor</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <button class="btn btn-success text-align-center" type="submit">Proceed</button>
-                        </div>
-                    </div>
-                </form>
-                </div>
-            </div>
-        {% endif %}
-        {% if leave.status == "Immediate Supervisor" and user == leave.staff.profile.immediate_supervisor %}
-            <div class="row container">
-                <div class="col-md-12">
-                <form method="post" class="d-flex" role="search">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <input type="hidden" name="leave_id" value="{{leave.id}}">
-                        <div class="mb-3 form-group col-md-6">
-                            <textarea name="email_message" placeholder="Message" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <select name="status" class="form-select" aria-label="Default select example" required>
-                                <option selected disabled>Change Status</option>
-                                <option value="Applicant">Applicant</option>
-                                <option value="Head Of Department">Head Of Department</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <button class="btn btn-success text-align-center" type="submit">Proceed</button>
-                        </div>
-                    </div>
-                </form>
-                </div>
-            </div>
-        {% endif %}
-        {% if leave.status == "Head Of Department" and user == leave.staff.profile.staff_profile.department.head %}
-            <div class="row container">
-                <div class="col-md-12">
+    {% if not leave.status == 'Approved' %}
+        <div class="row container">
+            <div class="col-md-12">
                 <form method="post" class="d-flex" role="search">
                     {% csrf_token %}
                     <div class="form-row">
                         <input type="hidden" name="pv_id" value="{{pv.id}}">
-                        <div class="mb-3 form-group col-md-6">
-                            <textarea name="email_message" placeholder="Message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-10">
                             <select name="status" class="form-select" aria-label="Default select example" required>
                                 <option selected disabled>Change Status</option>
-                                <option value="Immediate Supervisor">Immediate Supervisor</option>
-                                <option value="HR Office">HR Office</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                        <button class="btn btn-success text-align-center" type="submit">Proceed</button>
-                        </div>
-                    </div>
-                </form>
-                </div>
-            </div>
-        {% endif %}
-        {% if leave.status == "HR Office" and user.profile.is_hr %}
-            <div class="row container">
-                <div class="col-md-12">
-                <form method="post" class="d-flex" role="search">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <input type="hidden" name="pv_id" value="{{pv.id}}">
-                        <div class="mb-3 form-group col-md-6">
-                            <textarea name="email_message" placeholder="Message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <select name="status" class="form-select" aria-label="Default select example" required>
-                                <option selected disabled>Change Status</option>
-                                <option value="Rejected">Rejected</option>
                                 <option value="Approved">Approved</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
-                        <button class="btn btn-success text-align-center" type="submit">Proceed</button>
+                        <button class="btn btn-success" type="submit">Proceed</button>
                         </div>
                     </div>
                 </form>
-                </div>
             </div>
-        {% endif %}
+        </div>
     {% endif %}
 </div>
 {% endblock content %}
