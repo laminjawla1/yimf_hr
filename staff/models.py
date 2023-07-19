@@ -3,8 +3,8 @@ from section.models import Department, Title, Classification
 from PIL import Image
 import requests
 
-data = requests.get("https://restcountries.com/v3.1/all").json()
-countries = [(d['name']['common'], d['name']['common']) for d in data]
+# data = requests.get("https://restcountries.com/v3.1/all").json()
+# countries = [(d['name']['common'], d['name']['common']) for d in data]
 
 class Skill(models.Model):
     name = models.CharField(max_length=50)
@@ -45,7 +45,7 @@ class Employee(models.Model):
     linkedin_link = models.CharField(max_length=200, null=True, blank=True)
 
     # Contact details
-    country = models.CharField(max_length=100, null=True, blank=True, choices=sorted(countries, key=lambda x: x[0]))
+    country = models.CharField(max_length=100, null=True, blank=True)#, choices=sorted(countries, key=lambda x: x[0]))
     street = models.CharField(max_length=50, null=True, blank=True)
     city = models.CharField(max_length=50, null=True, blank=True)
     zip_code = models.IntegerField()
