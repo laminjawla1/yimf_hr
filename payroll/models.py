@@ -19,6 +19,7 @@ class Payroll(models.Model):
     individual_sshfc =  models.FloatField(default=0.0)
     deduction = models.FloatField(default=0.0, validators=[MinValueValidator(0)])
     staff_fin = models.FloatField(default=0.0, validators=[MinValueValidator(0)])
+    refund = models.FloatField(default=0.0, validators=[MinValueValidator(0)])
     icf = models.FloatField(default=15)
     net_pay = models.FloatField(default=0.0)
     deduction_type = models.CharField(max_length=50, blank=True, null=True)

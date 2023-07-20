@@ -37,7 +37,7 @@ def payrolls(request):
                 return HttpResponseRedirect(reverse("payrolls"))
             headers = ["EMPLOYEE", "BASIC SALARY", "MEDICAL ALLOWANCE", "TRANSPORT ALLOWANCE", "RESPONSIBILITY ALLOWANCE",
                        "HOUSING ALLOWANCE", "RISK ALLOWANCE", "SSHFC", "INDIVIDUAL SSHFC", "ICF", "INCOME TAX", "DEDUCTION",
-                       "DEDUCTION TYPE", "STAFF FINANCING", "GROSS PAY", "NET PAY", "DATE"
+                       "DEDUCTION TYPE", "STAFF FINANCING", "GROSS PAY", "NET PAY", "REFUND", "DATE"
             ]
             
             response = HttpResponse(
@@ -51,7 +51,7 @@ def payrolls(request):
                 writer.writerow([w.employee.employee_name, w.basic_salary, w.medical_allowance, w.transport_allowance,
                                 w.responsibility_allowance, w.housing_allowance, w.risk_allowance, w.sshfc,
                                 w.individual_sshfc, w.icf, w.income_tax, w.deduction, w.deduction_type,
-                                w.staff_fin, w.gross_pay, w.net_pay, w.date.strftime("%Y-%m-%d")])
+                                w.staff_fin, w.gross_pay, w.net_pay, w.refund, w.date.strftime("%Y-%m-%d")])
             return response
         form = PayrollForm(request.POST)
         filter_form = FilterPayrollForm(request.POST)
@@ -69,7 +69,7 @@ def payrolls(request):
             form.instance.sshfc = round((10 / 100) * form.instance.basic_salary, 4)
             form.instance.individual_sshfc = round((5 / 100) * form.instance.basic_salary, 4)
             form.instance.individual_sshfc = round((5 / 100) * form.instance.basic_salary, 4)
-            form.instance.net_pay = round(form.instance.gross_pay - form.instance.income_tax - form.instance.individual_sshfc - form.instance.deduction - form.instance.staff_fin, 4)
+            form.instance.net_pay = round(form.instance.gross_pay - form.instance.income_tax - form.instance.individual_sshfc - form.instance.deduction - form.instance.staff_fin + form.instance.refund, 4)
             form.save()
             messages.success(request, "Payroll added successfully 😊")
         if filter_form.is_valid():
@@ -114,7 +114,7 @@ def payrolls(request):
 
 class UpdatePayrollView(LoginRequiredMixin, UpdateView):
     model = Payroll
-    fields = ['employee', 'risk_allowance', 'basic_salary', 'income_tax', 'staff_fin', 'deduction', 'deduction_type']
+    fields = ['employee', 'risk_allowance', 'basic_salary', 'income_tax', 'staff_fin', 'deduction', 'refund', 'deduction_type']
 
     def form_valid(self, form):
         form.instance.staff_id = form.instance.employee.staff_id
@@ -129,7 +129,7 @@ class UpdatePayrollView(LoginRequiredMixin, UpdateView):
         form.instance.sshfc = round((10 / 100) * form.instance.basic_salary, 4)
         form.instance.individual_sshfc = round((5 / 100) * form.instance.basic_salary, 4)
         form.instance.individual_sshfc = round((5 / 100) * form.instance.basic_salary, 4)
-        form.instance.net_pay = round(form.instance.gross_pay - form.instance.income_tax - form.instance.individual_sshfc - form.instance.deduction - form.instance.staff_fin, 4)
+        form.instance.net_pay = round(form.instance.gross_pay - form.instance.income_tax - form.instance.individual_sshfc - form.instance.deduction - form.instance.staff_fin + form.instance.refund, 4)
         messages.success(self.request, "Payroll updated successfully.")
         return super().form_valid(form)
     
