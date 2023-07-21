@@ -6,9 +6,11 @@ class PayrollForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PayrollForm, self).__init__(*args, **kwargs)
         self.fields['employee'].queryset = Employee.objects.all().exclude(employment_status__in=["Resigned", "Fired"]).order_by("employee_name")
+        self.fields['date'].widget=forms.DateInput(attrs={'type': 'date'})
+
     class Meta:
         model = Payroll
-        fields = ['employee', 'risk_allowance', 'basic_salary', 'income_tax', 'staff_fin', 'refund', 'deduction', 'deduction_type']
+        fields = ['date', 'employee', 'risk_allowance', 'basic_salary', 'income_tax', 'staff_fin', 'refund', 'deduction', 'deduction_type']
 
 class FilterPayrollForm(forms.Form):
     staff = forms.CharField(label="", max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Employee'}))

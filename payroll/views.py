@@ -24,6 +24,13 @@ def payrolls(request):
     payrolls = Payroll.objects.filter(
         date__year=timezone.now().year, date__month=timezone.now().month
     ).order_by('-net_pay')
+    if request.method == 'GET':
+        page = request.GET.get('page', 1)
+        payrolls = Paginator(payrolls, 8)
+        try:
+            payrolls = payrolls.page(page)
+        except:
+            payrolls = payrolls.page(1)
     if request.method == 'POST':
         if request.POST.get('from_date') and request.POST.get('to_date'):
             from_date = request.POST.get('from_date')
@@ -79,9 +86,6 @@ def payrolls(request):
                     payrolls = Payroll.objects.filter(date__year=_date.year, date__month=_date.month).all()
                 payrolls = payrolls.filter(employee__employee_name__icontains=filter_form.cleaned_data.get('staff'),
                                                     employee__staff_id__icontains=filter_form.cleaned_data.get('staff_id')).all()
-    
-    page = request.GET.get('page', 1)
-    paginator = Paginator(payrolls, 8)
 
     basic_total = payrolls.aggregate(Sum('basic_salary')).get('basic_salary__sum') or 0
     medical_total = payrolls.aggregate(Sum('medical_allowance')).get('medical_allowance__sum') or 0
@@ -99,13 +103,8 @@ def payrolls(request):
     absolute_total = basic_total + medical_total + transport_total + responsibility_total + housing_total + gross_total \
                     + income_total + sshfc_total + individual_sshfc_total + deduction_total + icf_total + net_total
 
-    try:
-        paginator = paginator.page(page)
-    except:
-        paginator = paginator.page(1)
-
     return render(request, "payroll/payrolls.html", {
-        'payrolls': paginator, 'basic_total': basic_total, 'medical_total': medical_total, 'transport_total': transport_total,
+        'payrolls': payrolls, 'basic_total': basic_total, 'medical_total': medical_total, 'transport_total': transport_total,
         'responsibility_total': responsibility_total, 'housing_total': housing_total, 'gross_total': gross_total, 'income_total': income_total,
         'sshfc_total': sshfc_total, 'individual_sshfc_total': individual_sshfc_total, 'deduction_total': deduction_total, 'icf_total': icf_total,
         'net_total': net_total, 'absolute_total': absolute_total, 'staff_fin_total': staff_fin,
