@@ -5,7 +5,7 @@ body {
   font-family: 'Poppins';
   align-items: center;
   justify-content: center;
-  background-color: #B1D4E0;
+  background-color: #c5cdcf !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -210,41 +210,6 @@ a {
     text-decoration: none;
 }
 
-.ticker {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 1100px;
-    height: 59px;
-    margin: 10px auto;
-}
-.news {
-    width: 76%;
-    background: #581943;
-    color: white;
-    padding: 0 2%;
-    margin: 1% 10px;
-}
-.title {
-    width: 21%;
-    text-align: center;
-    background: #850e65;
-    position: relative;
-    color: white;
-}
-.title:after {
-    position: absolute;
-    content: "";
-    right: -14%;
-    border-left: 20px solid #eddcdc;
-    border-top: 30px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 28px solid transparent;
-    top: 0;
-}
-.title h5 {
-    font-size: 18px;
-    margin: 6% 0;
-}
 .news marquee {
     font-size: 18px;
 }
@@ -277,10 +242,46 @@ a[type="payroll"]{
   color:#ffffff
 }
 
-td, th {
-  text-align: center;
-}
-
 .logout-btn:hover {
   display: inline;
+}
+
+.page-item.active .page-link {
+  columns: #fff !important;
+  background-color: #6c757d !important;
+  border: 1px solid #6c757d !important;
+}
+.pagination > li > a {
+  color: #111;
+}
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > span > a:focus,
+.pagination > span > a:hover {
+  color: #111 !important;
+  background-color: #d3d3d3 !important;
+  border: 1px solid #6c757d !important;
+  box-shadow: none !important;
+}
+.dataTables_info {
+  color: #333 !important;
+  font-weight: bold !important;
+  float: left !important;
+  margin-top: -15px !important;
+}
+.dataTables_paginate {
+  margin-top: -5px !important;
+  float: right !important;
+}
+.dataTables_filter, .dataTables_length, btn-credit {
+  float: right !important;
+  margin-top: 1px !important;
+  margin-right: 10px !important;
+}
+thead input {
+  width: 100% !important;
+  text-align: center !important;
+}
+td {
+  text-align: center !important;
 }
