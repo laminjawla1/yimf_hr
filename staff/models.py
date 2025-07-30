@@ -6,7 +6,7 @@ import requests
 date = None
 countries = []
 try:
-    data = requests.get("https://restcountries.com/v3.1/all").json()
+    data = requests.get("https://restcountries.com/v3.1/all?fields=name").json()
     countries = [(d['name']['common'], d['name']['common']) for d in data]
 except:
     pass
