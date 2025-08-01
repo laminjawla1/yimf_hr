@@ -10,7 +10,18 @@ class PayrollForm(forms.ModelForm):
 
     class Meta:
         model = Payroll
-        fields = ['date', 'employee', 'risk_allowance', 'basic_salary', 'income_tax', 'staff_fin', 'refund', 'deduction', 'deduction_type']
+        fields = [
+            'date',
+            'employee',
+            'basic_salary',
+            'risk_allowance',
+            'provincial_allowance',
+            'income_tax',
+            'staff_fin',
+            'refund',
+            'deduction',
+            'deduction_type'
+        ]
 
 class FilterPayrollForm(forms.Form):
     staff = forms.CharField(label="", max_length=50, required=False, widget=forms.TextInput(attrs={'placeholder': 'Employee'}))

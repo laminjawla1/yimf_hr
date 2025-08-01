@@ -62,14 +62,37 @@ def payrolls(request):
             form.instance.transport_allowance = round(form.instance.basic_salary * 0.2333333333, 4)
             form.instance.responsibility_allowance = round(form.instance.basic_salary * 0.4666666667, 4)
             form.instance.housing_allowance =round( form.instance.basic_salary * 0.1333333333, 4)
-            form.instance.gross_pay = round(form.instance.basic_salary + form.instance.medical_allowance + form.instance.transport_allowance + form.instance.responsibility_allowance + form.instance.housing_allowance + form.instance.risk_allowance, 2)
+            form.instance.gross_pay = round(
+                form.instance.basic_salary +
+                form.instance.risk_allowance +
+                form.instance.provincial_allowance +
+                form.instance.medical_allowance +
+                form.instance.transport_allowance +
+                form.instance.responsibility_allowance + 
+                form.instance.housing_allowance
+            , 2)
             if form.instance.basic_salary > 2000:
-                form.instance.income_tax = round(((((form.instance.gross_pay * 12) - 64000) * (25 / 100)) + 5000) / 12, 4)
+                form.instance.income_tax = round(((((form.instance.gross_pay * 12) - 76000) * (25 / 100)) + 5000) / 12, 4)
 
-            form.instance.sshfc = round((10 / 100) * form.instance.basic_salary, 4)
             form.instance.individual_sshfc = round((5 / 100) * form.instance.basic_salary, 4)
-            form.instance.individual_sshfc = round((5 / 100) * form.instance.basic_salary, 4)
-            form.instance.net_pay = round(form.instance.gross_pay - form.instance.income_tax - form.instance.individual_sshfc - form.instance.deduction - form.instance.staff_fin + form.instance.refund, 4)
+            form.instance.sshfc = round(form.instance.individual_sshfc * 2, 4)
+            form.instance.total_deduction = round(
+                form.instance.income_tax +
+                form.instance.individual_sshfc +
+                form.instance.deduction +
+                form.instance.staff_fin
+            , 4)
+            form.instance.net_pay = round(
+                form.instance.gross_pay -
+                form.instance.total_deduction +
+                form.instance.refund
+            , 4)
+            form.instance.ten_percent_net = round(form.instance.net_pay * (10 / 100), 4)
+            form.instance.ninety_percent_net = round(form.instance.net_pay - form.instance.ten_percent_net, 4)
+
+            # Calculate icf
+            if form.instance.basic_salary * 0.01 < 15:
+                form.instance.icf = 12 * 0.01
             form.save()
             messages.success(request, "Payroll added successfully 😊")
         if filter_form.is_valid():
@@ -121,13 +144,37 @@ class UpdatePayrollView(LoginRequiredMixin, UpdateView):
         form.instance.transport_allowance = round(form.instance.basic_salary * 0.2333333333, 4)
         form.instance.responsibility_allowance = round(form.instance.basic_salary * 0.4666666667, 4)
         form.instance.housing_allowance =round( form.instance.basic_salary * 0.1333333333, 4)
-        form.instance.gross_pay = round(form.instance.basic_salary + form.instance.medical_allowance + form.instance.transport_allowance + form.instance.responsibility_allowance + form.instance.housing_allowance + form.instance.risk_allowance, 4)
+        form.instance.gross_pay = round(
+            form.instance.basic_salary +
+            form.instance.risk_allowance +
+            form.instance.provincial_allowance +
+            form.instance.medical_allowance +
+            form.instance.transport_allowance +
+            form.instance.responsibility_allowance + 
+            form.instance.housing_allowance
+        , 2)
         if form.instance.basic_salary > 2000:
-            form.instance.income_tax = round(((((form.instance.gross_pay * 12) - 64000) * (25 / 100)) + 5000) / 12, 4)
-        form.instance.sshfc = round((10 / 100) * form.instance.basic_salary, 4)
+            form.instance.income_tax = round(((((form.instance.gross_pay * 12) - 76000) * (25 / 100)) + 5000) / 12, 4)
+
         form.instance.individual_sshfc = round((5 / 100) * form.instance.basic_salary, 4)
-        form.instance.individual_sshfc = round((5 / 100) * form.instance.basic_salary, 4)
-        form.instance.net_pay = round(form.instance.gross_pay - form.instance.income_tax - form.instance.individual_sshfc - form.instance.deduction - form.instance.staff_fin + form.instance.refund, 4)
+        form.instance.sshfc = round(form.instance.individual_sshfc * 2, 4)
+        form.instance.total_deduction = round(
+            form.instance.income_tax +
+            form.instance.individual_sshfc +
+            form.instance.deduction +
+            form.instance.staff_fin
+        , 4)
+        form.instance.net_pay = round(
+            form.instance.gross_pay -
+            form.instance.total_deduction +
+            form.instance.refund
+        , 4)
+        form.instance.ten_percent_net = round(form.instance.net_pay * (10 / 100), 4)
+        form.instance.ninety_percent_net = round(form.instance.net_pay - form.instance.ten_percent_net, 4)
+
+        # Calculate icf
+        if form.instance.basic_salary * 0.01 < 15:
+            form.instance.icf = 12 * 0.01
         messages.success(self.request, "Payroll updated successfully.")
         return super().form_valid(form)
     
@@ -221,7 +268,7 @@ def render_payslip(request, payroll_id):
                 return HttpResponseRedirect(reverse('payrolls'))
         net_pay_in_words = inflect.engine()
         net_pay_in_words = net_pay_in_words.number_to_words(int(payslip.net_pay)).capitalize() + " dalasis"
-        total_deduction = payslip.icf + payslip.individual_sshfc + payslip.income_tax + payslip.staff_fin + payslip.deduction
+        total_deduction = payslip.total_deduction
         return render(request, 'payroll/payslip.html', {
             'payslip': payslip, 'staff': staff, 'net_pay_in_words': net_pay_in_words, 'total_deduction': total_deduction,
             'current_page': 'payrolls'
